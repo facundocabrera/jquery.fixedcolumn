@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <script src="bower_components/modernizr/modernizr.js"></script>
+  <script src="bower_components/modernizr/feature-detects/css-positionsticky.js"></script>
   <script src="bower_components/jquery/jquery.js"></script>
   <script src="jquery.fixedcolumn.js"></script>
+
   <script>
     $(function() {
       // $.fn.fixedcolumn.Constructor.useSticky = true;
@@ -40,7 +42,6 @@
       background-color: blue;
 
       color: white;
-      box-sizing: border-box;
     }
   </style>
 
@@ -50,15 +51,15 @@
   <div class="container scrollable">
     <div>
       <div class="sticky"></div>
-      <div class="content">a</div>
+      <div class="content"></div>
     </div>
     <div>
       <div class="sticky"></div>
-      <div class="content">a</div>
+      <div class="content"></div>
     </div>
     <div>
       <div class="sticky"></div>
-      <div class="content">a</div>
+      <div class="content"></div>
     </div>
   </div>
 
