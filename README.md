@@ -20,5 +20,5 @@
 ## JS Snippet
 
 ```js
-$('.fixed-column').fixedcolumn(); // this will handle all the JS show for you
+$('.sticky').fixedcolumn(); // this will handle all the JS show for you
 ```
