@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CSS position: sticky</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="bower_components/modernizr/modernizr.js"></script>
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="jquery.fixedcolumn.js"></script>
+  <script>
+    $(function() {
+      // $.fn.fixedcolumn.Constructor.useSticky = true;
+      $('.sticky').fixedcolumn();
+    });
+  </script>
+
+  <style>
+    .container {
+      overflow: auto;
+    }
+
+    .sticky {
+      position: -webkit-sticky;
+      position: sticky;
+      left: 0;
+
+      height: 100px;
+      width: 100px;
+
+      background-color: #EEE;
+    }
+
+    .content {
+      margin-top: -100px;
+      margin-left: 100px;
+
+      height: 100px;
+      width: 1200px;
+      background-color: blue;
+
+      color: white;
+      box-sizing: border-box;
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="container scrollable">
+    <div>
+      <div class="sticky"></div>
+      <div class="content">a</div>
+    </div>
+    <div>
+      <div class="sticky"></div>
+      <div class="content">a</div>
+    </div>
+    <div>
+      <div class="sticky"></div>
+      <div class="content">a</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="container scrollable">
+    <div class="sticky"></div>
+    <div class="content"></div>
+  </div>
+
+  <hr>
+
+  <div class="container scrollable" style="border: 2px solid green">
+    <div class="sticky" style="background: #EEE"></div>
+    <div class="content">
+      <div class="container scrollable" style="border: 2px solid blue">
+        <div class="sticky" style="background: #000"></div>
+        <div class="content" style="background: red"></div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>

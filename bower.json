@@ -1,0 +1,20 @@
+{
+  "name": "jquery.fixedcolumn",
+  "version": "0.0.0",
+  "authors": [
+    "Facundo Cabrera <cabrerafacundo@gmail.com>"
+  ],
+  "description": "css position:sticky",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "modernizr": "~2.6.2",
+    "jquery": "~2.0.3"
+  }
+}
