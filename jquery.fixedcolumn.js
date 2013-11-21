@@ -5,7 +5,15 @@
     this.init(element);
   };
 
-  FixedColumn.useSticky = $('html').hasClass('csspositionsticky');
+  FixedColumn.useSticky = (function () {
+    var ua = navigator.userAgent.match(/version\/((\d+)?[\w\.]+).+?mobile\/\w+\s(safari)/i),
+      stickyTest = $('html').hasClass('csspositionsticky');
+
+    // if i'm running iOS 6 - use the fallback
+    if (stickyTest && ua && (parseInt(ua[2], 10) < 7)) return false;
+
+    return stickyTest;
+  }());
 
   FixedColumn.prototype = {
     constructor: FixedColumn,
