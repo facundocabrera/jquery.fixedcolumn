@@ -7,7 +7,7 @@
   Scrollable area (it could be any ancestor, it's no need to be the direct
   one)
 -->
-<div class="container scrollable">
+<div class="scrollable">
   <div class="sticky">
     <!-- Fixed column will be here -->
   </div>
