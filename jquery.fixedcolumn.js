@@ -1,35 +1,5 @@
-/*\
-  When position: sticky doesn't work, the JS will fallback to CSS transforms.
-
-  ## Markup proposed
-  <!--
-    Scrollable area (it could be any ancestor, it's no need to be the direct
-    one)
-  -->
-  <div class="container scrollable">
-    <div class="sticky">
-      <!-- Fixed column will be here -->
-    </div>
-    <div class="content">
-      <!-- Content bellow the fixed column -->
-    </div>
-  </div>
-
-  ## JS Snippet
-  $('.fixed-column').fixedcolumn(); // this will handle all the JS show for you
-
-\*/
 (function($) {
   'use strict';
-
-  var events = {
-    queue: function($el) {
-      $el.closest('.scrollable').on('scroll.fixedcolumn', function(ev) {
-        $el.data('fixedcolumn')
-           .translate($(ev.currentTarget).scrollLeft());
-      });
-    }
-  };
 
   var FixedColumn = function(element) {
     this.init(element);
@@ -38,21 +8,17 @@
   FixedColumn.useSticky = $('html').hasClass('csspositionsticky');
 
   FixedColumn.prototype = {
-
     constructor: FixedColumn,
 
     init: function($el) {
-      this.$el = $el;
-
       if (!FixedColumn.useSticky) {
+        this.$el = $el;
 
         this.initialLeft = parseInt($el.css('left'), 10) || 0;
 
-        $el.css({
-          transform: ['translateX(', this.initialLeft, 'px)'].join('')
-        });
+        this.translate();
 
-        events.queue($el);
+        this.listenScroll();
       }
     },
 
@@ -64,8 +30,19 @@
       return this;
     },
 
+    listenScroll: function() {
+      var handler = $.proxy(function(ev) {
+        this.translate($(ev.currentTarget).scrollLeft());
+      }, this);
+
+      this.$scrollable = this.$el.closest('.scrollable').on('scroll.fixedcolumn', handler);
+    },
+
     destroy: function() {
-      // Impl me!
+      this.$el.css({
+        transform: 'none'
+      });
+      this.$scrollable.off('.fixedcolumn');
     }
 
   };
