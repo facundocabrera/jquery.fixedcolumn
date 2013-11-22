@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CSS position: sticky</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    .container {
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .b {
+      /** just informative **/
+      margin: 4px;
+      border: 2px solid red;
+
+      /** force full width **/
+      display: inline-block;
+    }
+
+    .c {
+      margin: 4px;
+      border: 2px solid indigo;
+    }
+
+    .sticky {
+      position: -webkit-sticky;
+      position: sticky;
+      left: 0;
+
+      height: 100px;
+      width: 100px;
+
+      background-color: #EEE;
+    }
+
+    .content {
+      margin-top: -100px;
+      margin-left: 100px;
+
+      height: 100px;
+      width: 3000px;
+      background: rgba(120, 45, 90, 0.5);
+
+      color: white;
+    }
+  </style>
+
+</head>
+<body>
+
+  <h2>Works Cross-Browser</h2>
+  <!-- Working example including iOS6 & canary -->
+  <div class="c container scrollable">
+    <div class="b">
+      <div class="sticky"></div>
+      <div class="content"></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2>Doesn't Work in iOS6 and Chrome Canary</h2>
+  <!-- No working example including iOS6 & canary -->
+  <div class="c container scrollable">
+    <div class="sticky"></div>
+    <div class="content"></div>
+  </div>
+
+</body>
+</html>
