@@ -39,18 +39,19 @@
     },
 
     listenScroll: function() {
-      var handler = $.proxy(function(ev) {
+      this._listener = $.proxy(function(ev) {
         this.translate($(ev.currentTarget).scrollLeft());
       }, this);
 
-      this.$scrollable = this.$el.closest('.scrollable').on('scroll.fixedcolumn', handler);
+      this.$scrollable = this.$el.closest('.scrollable').on('scroll.fixedcolumn', this._listener);
     },
 
     destroy: function() {
+      this.$el.data('fixedcolumn', null);
       this.$el.css({
         transform: 'none'
       });
-      this.$scrollable.off('.fixedcolumn');
+      this.$scrollable.off('scroll.fixedcolumn', this._listener);
     }
 
   };
