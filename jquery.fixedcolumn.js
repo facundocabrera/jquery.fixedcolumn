@@ -5,7 +5,7 @@
     this.init(element);
   };
 
-  FixedColumn.useSticky = (function () {
+  FixedColumn.useSticky = (function() {
     var ua = navigator.userAgent.match(/version\/((\d+)?[\w\.]+).+?mobile\/\w+\s(safari)/i),
       stickyTest = $('html').hasClass('csspositionsticky');
 
@@ -22,6 +22,8 @@
       if (!FixedColumn.useSticky) {
         this.$el = $el;
 
+        // Force position - iOS 6 bug
+        $el.css('position', 'static');
         this.initialLeft = parseInt($el.css('left'), 10) || 0;
 
         this.translate();
@@ -39,21 +41,36 @@
     },
 
     listenScroll: function() {
-      this._listener = $.proxy(function(ev) {
-        this.translate($(ev.currentTarget).scrollLeft());
-      }, this);
+      var self = this,
+        currentLeft = 0,
+        previousLeft = 0,
+        rAF = function() {
+          self.rAFIndex = requestAnimationFrame(rAF);
+          currentLeft = self.$scrollable.scrollLeft();
 
-      this.$scrollable = this.$el.closest('.scrollable').on('scroll.fixedcolumn', this._listener);
+          if (currentLeft !== previousLeft) {
+            self.translate(currentLeft);
+            previousLeft = currentLeft;
+          }
+        };
+
+      // cache scrollable
+      this.$scrollable = this.$el.closest(this.$el.data('target'));
+      // start animation frame
+      rAF();
     },
 
     destroy: function() {
-      this.$el.data('fixedcolumn', null);
-      this.$el.css({
-        transform: 'none'
-      });
-      this.$scrollable.off('scroll.fixedcolumn', this._listener);
-    }
+      if (!FixedColumn.useSticky) {
 
+        cancelAnimationFrame(this.rAFIndex);
+
+        this.$el.data('fixedcolumn', null);
+        this.$el.css({
+          transform: 'none'
+        });
+      }
+    }
   };
 
   var old = $.fn.fixedcolumn;

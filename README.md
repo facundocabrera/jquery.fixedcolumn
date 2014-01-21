@@ -8,7 +8,7 @@
   one)
 -->
 <div class="scrollable">
-  <div class="sticky">
+  <div class="sticky" data-target=".scrollable">
     <!-- Fixed column will be here -->
   </div>
   <div class="content">
@@ -29,3 +29,9 @@ $('.sticky').fixedcolumn(); // this will handle all the JS show for you
   - Chrome 31 use the fallback (I didn't activate the support manually)
   - Safari 6.1+ for OSX runs native
   - iOS Safari >= Version/7.0 runs native (Safari = Version/6.0 only supports top property)
+
+## Change log
+
+  - 0.0.3 - Add requestAnimationFrame dependence and `data-target` attribute for scrollable ancestor selection
+  - 0.0.2 - Fix destroy method
+  - 0.0.1 - Inital 
